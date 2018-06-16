@@ -1,9 +1,13 @@
 package view;
 
+import java.sql.SQLException;
+
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.UnsupportedLookAndFeelException;
+
+import controller.TestaConexao;
 
 public class disparaSistema {
 
@@ -26,6 +30,11 @@ public class disparaSistema {
 			JOptionPane.showMessageDialog(null,"Look and feel tentou acesso ilegal");
 		}
 		JOptionPane.showMessageDialog(null, "Bem vindo ao RepManager");
+		try {
+			new TestaConexao();
+		}catch (SQLException e) {
+			JOptionPane.showMessageDialog(null,"Falha na conexão");
+		}
 		new formMenu();
 
 	}
