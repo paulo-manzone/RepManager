@@ -1,14 +1,13 @@
 package model;
 
+import java.util.Calendar;
+
 public class Festa {
 	
 	//Atributos do modelo
 	private int numFesta;
-	private int dia;
-	private int mes;
-	private int ano;
+	private Calendar data;
 	private String local;
-	private String horario;
 	
 	//Getters e Setters
 	public int getNumFesta() {
@@ -17,30 +16,19 @@ public class Festa {
 	public void setNumFesta(int numFesta) {
 		this.numFesta = numFesta;
 	}
-	public int getDia() {
-		return dia;
+	public Calendar getData() {
+		return data;
 	}
-	public void setDia(int dia) {
-		this.dia = dia;
+	public void setData(Calendar data) {
+		this.data = data;
 	}
-	public int getMes() {
-		return mes;
+	public String getLocal() {
+		return local;
 	}
-	public void setMes(int mes) {
-		this.mes = mes;
+	public void setLocal(String local) {
+		this.local = local;
 	}
-	public int getAno() {
-		return ano;
-	}
-	public void setAno(int ano) {
-		this.ano = ano;
-	}
-	public String getHorario() {
-		return horario;
-	}
-	public void setHorario(String horario) {
-		this.horario = horario;
-	}
+	
 	
 	
 	

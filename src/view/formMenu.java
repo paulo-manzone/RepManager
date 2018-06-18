@@ -19,9 +19,9 @@ public class formMenu extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 7873173409182286284L;
 	
 	//Componentes utilizados
+	private JButton btnTarefas = new JButton("Tarefas");
 	private JButton btnEstadia = new JButton("Estadia");
 	private JButton btnFestas = new JButton("Festas");
-	private JButton btnTarefas = new JButton("Tarefas");
 	private JButton btnSair = new JButton("Sair");
 	private JButton Titulo = new JButton("# RepManager #");
 	
@@ -56,10 +56,10 @@ public class formMenu extends JFrame implements ActionListener {
 		Titulo.setBorder(BorderFactory.createBevelBorder(1));
 
 		//adicionando listeners aos componentes
+		btnTarefas.addActionListener(this);
 		btnSair.addActionListener(this);
 		btnEstadia.addActionListener(this);
 		btnFestas.addActionListener(this);
-		btnTarefas.addActionListener(this);
 		
 	}
 
@@ -68,6 +68,10 @@ public class formMenu extends JFrame implements ActionListener {
 	//Listeners
 	public void actionPerformed(ActionEvent e) {
 		Object alvo = e.getSource();
+		
+		if(alvo == btnTarefas) {
+			new formTarefas();
+		}
 		if(alvo == btnSair) {
 			this.dispose();
 		}
@@ -79,9 +83,6 @@ public class formMenu extends JFrame implements ActionListener {
 			new formFestas();
 		}
 		
-		if(alvo == btnTarefas) {
-			new formTarefas();
-		}
 		
 	}
 	
