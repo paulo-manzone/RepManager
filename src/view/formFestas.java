@@ -86,12 +86,16 @@ public class formFestas extends JFrame implements ActionListener{
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 			        if (tblFestas.getSelectedRow() > -1) {
+			        	int aux;
 			        	int i = tblFestas.getSelectedRow();
 						Object x = tblFestas.getValueAt(i, 0);
 						txtNFesta.setText(String.valueOf(x));
+						aux = Integer.parseInt(String.valueOf(x));
 						x = tblFestas.getValueAt(i, 2);
 						txtLocal.setText(String.valueOf(x));
 						x=tblFestas.getValueAt(i, 1);
+						new cadastraOrganizador(aux);
+						
 			        }
 			}
 		}); 
