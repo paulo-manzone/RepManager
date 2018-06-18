@@ -101,5 +101,30 @@ private Connection con;
 			JOptionPane.showMessageDialog(null, "Erro: "+ e.getMessage());	
 		}
 	}
+	
+	//==========================================================================================
+	//											LER APENAS VETERANOS
+	//==========================================================================================
+	public List<Morador> lerVeteranos(){
+		List<Morador> moradores = new ArrayList<Morador>();
+		try {
+			
+			PreparedStatement stmt = this.con.prepareStatement("select * from morador where veterano=1");
+			ResultSet rs = stmt.executeQuery();
+			while(rs.next()) {
+				Morador m = new Morador();
+				m.setCpf(rs.getInt("cpf"));
+				m.setNome(rs.getString("nome"));
+				m.setCurso(rs.getString("curso"));
+				m.setVeterano(rs.getBoolean("veterano"));
+				moradores.add(m);
+			}
+			rs.close();
+			stmt.close();
+		}catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Erro: "+ e.getMessage());	
+		}
+		return moradores;
+	}
 
 }

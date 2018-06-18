@@ -3,14 +3,23 @@ package view;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+
+import model.Morador;
+import model.Quarto;
+import modelDao.MoradorDao;
+import modelDao.QuartoDao;
 
 public class cadastraQuarto extends JFrame implements ActionListener{
 
@@ -32,13 +41,12 @@ public class cadastraQuarto extends JFrame implements ActionListener{
 		this.setLocationRelativeTo(null);
 		this.setTitle("Cadastrar Quarto");
 		this.setResizable(false);
+		DefaultTableModel dataModel = new DefaultTableModel();
+		
 		
 		//criando JTable
-		TableModel dataModel = new AbstractTableModel() {
-	          public int getColumnCount() { return 2; }
-	          public int getRowCount() { return 10;}
-	          public Object getValueAt(int row, int col) { return null; }
-	      };
+		dataModel.addColumn("Nº do Quarto");
+		dataModel.addColumn("Capacidade");
 	      tblQuartos = new JTable(dataModel);
 	      tblQuartos.getColumnModel().getColumn(0).setHeaderValue("Nº do Quarto");
 	      tblQuartos.getColumnModel().getColumn(1).setHeaderValue("Capacidade");
@@ -57,6 +65,20 @@ public class cadastraQuarto extends JFrame implements ActionListener{
 		btnCadastra.addActionListener(this);
 		btnAtualiza.addActionListener(this);
 		btnExclui.addActionListener(this);
+		tblQuartos.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+			
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+			        if (tblQuartos.getSelectedRow() > -1) {
+			        	int i = tblQuartos.getSelectedRow();
+						Object x = tblQuartos.getValueAt(i, 0);
+						txtNQuarto.setText(String.valueOf(x));
+						x = tblQuartos.getValueAt(i, 1);
+						txtCapacidade.setText(String.valueOf(x));
+						
+			        }
+			}
+		});
 				
 		//adicionando componentes ao JFrame
 		this.add(txtNQuarto);
@@ -65,19 +87,54 @@ public class cadastraQuarto extends JFrame implements ActionListener{
 		this.add(btnAtualiza);
 		this.add(btnExclui);
 		this.add(scrollpane);
+		
+		//Lendo para a tabela
+		atualizaTable();
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object alvo = e.getSource();
 		if(alvo == btnCadastra) {
+			Quarto q = new Quarto();
+			q.setNumQuarto(Integer.parseInt(txtNQuarto.getText()));
+			q.setCapacidade(Integer.parseInt(txtCapacidade.getText()));
+			QuartoDao qbd = new QuartoDao();
+			qbd.adicionar(q);
+			txtNQuarto.setText("");
+			txtCapacidade.setText("");
+			atualizaTable();
 			
 		}
 		if(alvo == btnAtualiza) {
+			Quarto q = new Quarto();
+			q.setNumQuarto(Integer.parseInt(txtNQuarto.getText()));
+			q.setCapacidade(Integer.parseInt(txtCapacidade.getText()));
+			QuartoDao qbd = new QuartoDao();
+			qbd.atualizar(q);
+			atualizaTable();
 			
 		}
 		if(alvo == btnExclui) {
-	
+			Quarto q = new Quarto();
+			q.setNumQuarto(Integer.parseInt(txtNQuarto.getText()));
+			QuartoDao qbd = new QuartoDao();
+			qbd.excluir(q);
+			txtNQuarto.setText("");
+			txtCapacidade.setText("");
+			atualizaTable();
 		}
+	}
+	
+	public void atualizaTable() {
+		DefaultTableModel model = (DefaultTableModel) tblQuartos.getModel();
+		model.setRowCount(0); // apaga tudo
+		List<Quarto> quartos;
+		QuartoDao qbd2 = new QuartoDao();
+		quartos = qbd2.ler();
+		for(Quarto quarto: quartos) {
+			model.addRow(new Object[]{quarto.getNumQuarto(),quarto.getCapacidade()});//insere todas as coisas lidas
+		}
+		
 	}
 }
