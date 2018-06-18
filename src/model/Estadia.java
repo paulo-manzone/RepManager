@@ -1,13 +1,14 @@
 package model;
 
+import java.util.Calendar;
+
 public class Estadia {
 
 	//Atributos do modelo
 	private int cpf;
 	private int numQuarto;
 	private double custo;
-	private int mes;
-	private int ano;
+	private Calendar data;
 	
 	//Getters e Setters
 	public int getCpf() {
@@ -28,18 +29,13 @@ public class Estadia {
 	public void setCusto(double custo) {
 		this.custo = custo;
 	}
-	public int getMes() {
-		return mes;
+	public Calendar getData() {
+		return data;
 	}
-	public void setMes(int mes) {
-		this.mes = mes;
+	public void setData(Calendar data) {
+		this.data = data;
 	}
-	public int getAno() {
-		return ano;
-	}
-	public void setAno(int ano) {
-		this.ano = ano;
-	}
+	
 	
 	
 }

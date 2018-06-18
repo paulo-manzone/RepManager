@@ -1,12 +1,13 @@
 package model;
 
+import java.util.Calendar;
+
 public class Responsavel {
 	
 	//Atributos do modelo
 	private int numTarefa;
 	private int cpf;
-	private int mes;
-	private int ano;
+	private Calendar data;
 	
 	//Getters e Setters
 	public int getNumTarefa() {
@@ -18,21 +19,16 @@ public class Responsavel {
 	public int getCpf() {
 		return cpf;
 	}
-	public void setCPF(int cpf) {
-		cpf = cpf;
+	public void setCpf(int cpf) {
+		this.cpf = cpf;
 	}
-	public int getMes() {
-		return mes;
+	public Calendar getData() {
+		return data;
 	}
-	public void setMes(int mes) {
-		this.mes = mes;
+	public void setData(Calendar data) {
+		this.data = data;
 	}
-	public int getAno() {
-		return ano;
-	}
-	public void setAno(int ano) {
-		this.ano = ano;
-	}
+	
 	
 	
 

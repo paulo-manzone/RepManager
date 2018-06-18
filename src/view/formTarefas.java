@@ -70,11 +70,14 @@ public class formTarefas extends JFrame implements ActionListener{
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 			        if (tblTarefas.getSelectedRow() > -1) {
+			        	int aux;
 			        	int i = tblTarefas.getSelectedRow();
 						Object x = tblTarefas.getValueAt(i, 0);
 						txtNumTarefa.setText(String.valueOf(x));
+						aux = Integer.parseInt(String.valueOf(x));
 						x = tblTarefas.getValueAt(i, 1);
 						txtDescricao.setText(String.valueOf(x));
+						new cadastraResponsavel(aux);
 			        }
 				
 			}

@@ -30,7 +30,7 @@ private Connection con;
 	//===========================================================================================
 	
 	public void adicionar(Festa festa) {
-		String sql = "insert into festa (numFesta, data, local) values (?,?, ?)";
+		String sql = "insert into festa (numFesta, data, local) values (?,?,?)";
 		PreparedStatement stmt;
 		try {
 			stmt = con.prepareStatement(sql);
