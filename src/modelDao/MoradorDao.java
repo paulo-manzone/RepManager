@@ -103,13 +103,14 @@ private Connection con;
 	}
 	
 	//==========================================================================================
-	//											LER APENAS VETERANOS
+	//											LER POR CPF
 	//==========================================================================================
-	public List<Morador> lerVeteranos(){
-		List<Morador> moradores = new ArrayList<Morador>();
+	public Morador lerCpf(int cpf){
+		Morador morador = new Morador();
 		try {
 			
-			PreparedStatement stmt = this.con.prepareStatement("select * from morador where veterano=1");
+			PreparedStatement stmt = this.con.prepareStatement("select * from morador where cpf=?");
+			stmt.setInt(1, cpf);
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next()) {
 				Morador m = new Morador();
@@ -117,14 +118,14 @@ private Connection con;
 				m.setNome(rs.getString("nome"));
 				m.setCurso(rs.getString("curso"));
 				m.setVeterano(rs.getBoolean("veterano"));
-				moradores.add(m);
+				morador = m;
 			}
 			rs.close();
 			stmt.close();
 		}catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Erro: "+ e.getMessage());	
 		}
-		return moradores;
+		return morador;
 	}
 
 }

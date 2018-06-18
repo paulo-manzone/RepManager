@@ -4,25 +4,25 @@ create table festa(
 	numFesta integer,
 	data date,
 	local varchar(15),
-	primary key(numFesta));
+	primary key(numFesta)) engine = innodb;
 
 create table morador(
 	cpf integer,
 	nome varchar(30),
 	curso varchar(20),
 	veterano boolean,
-	primary key (cpf));
+	primary key (cpf)) engine = innodb;
 
 create table quarto(
 	numQuarto integer,
 	capacidade integer,
-	primary key (numQuarto));
+	primary key (numQuarto)) engine = innodb;
 
 
 create table tarefa(
 	numTarefa integer,
 	descricao varchar(50),
-	primary key (numTarefa));
+	primary key (numTarefa)) engine = innodb;
 
 create table mora(
 	cpf integer,
@@ -31,14 +31,14 @@ create table mora(
 	data date,
 	primary key (cpf),
 	constraint fk_cpf foreign key (cpf) references morador(cpf),
-	constraint fk_nq foreign key (numQuarto) references quarto(numQuarto));
+	constraint fk_nq foreign key (numQuarto) references quarto(numQuarto)) engine = innodb;
 
 create table organizacao(
 	cpf integer,
 	numFesta integer,
 	primary key (cpf, numFesta),
 	constraint fk_cpfo foreign key (cpf) references morador(cpf),
-	constraint fk_nf foreign key (numFesta) references festa(numFesta));
+	constraint fk_nf foreign key (numFesta) references festa(numFesta)) engine = innodb;
 
 create table responsavel(
 	cpf integer,
@@ -46,4 +46,4 @@ create table responsavel(
 	data date,
 	primary key (cpf, numTarefa),
 	constraint fk_cpfr foreign key (cpf) references morador(cpf),
-	constraint fk_tarefa foreign key (numTarefa) references tarefa(numTarefa));
+	constraint fk_tarefa foreign key (numTarefa) references tarefa(numTarefa)) engine = innodb;

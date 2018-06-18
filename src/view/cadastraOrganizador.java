@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -16,8 +17,10 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
+import model.Morador;
 import model.Organizacao;
 import model.Responsavel;
+import modelDao.MoradorDao;
 import modelDao.OrganizacaoDao;
 import modelDao.ResponsavelDao;
 
@@ -91,7 +94,11 @@ public class cadastraOrganizador extends JFrame implements ActionListener{
 				o.setCpf(Integer.parseInt(txtCPF.getText()));
 				o.setNumFesta(festira);
 				OrganizacaoDao obd = new OrganizacaoDao();
-				obd.adicionar(o);
+				if(validaVeterano(o.getCpf())) {
+					obd.adicionar(o);
+				}else {
+					JOptionPane.showMessageDialog(null, "Erro: Apenas veteranos podem organizar festas!");
+				}
 				txtCPF.setText("CPF");
 				atualizaTable();
 			}
@@ -114,6 +121,15 @@ public class cadastraOrganizador extends JFrame implements ActionListener{
 			for(Organizacao o: orgs) {
 				model.addRow(new Object[]{o.getCpf(),o.getNumFesta()});//insere todas as coisas lidas
 			}
+			
+		}
+		
+		private boolean validaVeterano(int cpf) {
+			MoradorDao mdb = new MoradorDao();
+			Morador m = mdb.lerCpf(cpf);
+			if(m.getVeterano() == true) {
+				return true;
+			}else return false;
 			
 		}
 }

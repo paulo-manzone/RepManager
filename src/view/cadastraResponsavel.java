@@ -57,8 +57,8 @@ public class cadastraResponsavel extends JFrame implements ActionListener{
 		tblResponsaveis.getColumnModel().getColumn(0).setHeaderValue("CPF");
 		tblResponsaveis.getColumnModel().getColumn(1).setHeaderValue("Nº da Tarefa");
 		tblResponsaveis.getColumnModel().getColumn(2).setHeaderValue("Dia");
-		tblResponsaveis.getColumnModel().getColumn(2).setHeaderValue("Mes");
-		tblResponsaveis.getColumnModel().getColumn(2).setHeaderValue("Ano");
+		tblResponsaveis.getColumnModel().getColumn(3).setHeaderValue("Mes");
+		tblResponsaveis.getColumnModel().getColumn(4).setHeaderValue("Ano");
 
 		JScrollPane scrollpane = new JScrollPane(tblResponsaveis);
 		
