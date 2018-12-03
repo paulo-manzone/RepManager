@@ -1,12 +1,17 @@
 package view;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import controller.CriadorBancoDadosOracle;
+import controller.OracleConnectionFactory;
 import controller.TestaConexao;
 
 public class disparaSistema {
@@ -35,7 +40,25 @@ public class disparaSistema {
 		}catch (SQLException e) {
 			JOptionPane.showMessageDialog(null,"Falha na conexão");
 		}
+		
+		//Criar o banco  em si
+		//new CriadorBancoDadosOracle();
+		
+		/*Testando o banco de dados oracle
+		try {
+			Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "system", "123456");
+			Statement st = con.createStatement();
+			st.execute("CREATE or REPLACE TABLE arroz (id varchar(5))");
+			con.close();
+		} catch(SQLException e){
+			JOptionPane.showMessageDialog(null,"Erro na conexão bro!");
+		}*/
+		//Fim teste===================
+		
+		
 		new formMenu();
+		
+		
 
 	}
 

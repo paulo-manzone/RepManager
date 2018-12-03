@@ -44,6 +44,6 @@ create table responsavel(
 	cpf integer,
 	numTarefa integer,
 	data date,
-	primary key (cpf, numTarefa),
+	primary key (cpf, numTarefa, data),
 	constraint fk_cpfr foreign key (cpf) references morador(cpf),
 	constraint fk_tarefa foreign key (numTarefa) references tarefa(numTarefa)) engine = innodb;

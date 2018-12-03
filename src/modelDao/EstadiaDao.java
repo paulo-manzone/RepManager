@@ -11,15 +11,18 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import controller.ConnectionFactory;
+import controller.OracleConnectionFactory;
 import model.Estadia;
 
 public class EstadiaDao {
 private Connection con;
 	
 	
+
+
 	//construtor inicia conexão
 	public EstadiaDao() {
-		this.con = new ConnectionFactory().getConnection();
+		this.con = new OracleConnectionFactory().getConnection();
 	}
 
 	

@@ -107,7 +107,7 @@ public class cadastraEstadia extends JFrame implements ActionListener{
 	      this.add(txtMes);
 	      this.add(txtAno);
 	      this.add(btnCadastra);
-	      this.add(btnAtualiza);
+	      //this.add(btnAtualiza);
 	      this.add(btnExclui);
 	      this.add(scrollpane);
 	      

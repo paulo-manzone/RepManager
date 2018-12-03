@@ -11,4 +11,9 @@ public class TestaConexao {
 		Connection con = new ConnectionFactory().getConnection();
 		con.close();
 	}
+	
+	public void TestaConexaoOracle() throws SQLException{
+		Connection con = new OracleConnectionFactory().getConnection();
+		con.close();
+	}
 }
