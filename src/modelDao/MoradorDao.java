@@ -11,6 +11,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import controller.ConnectionFactory;
+import controller.OracleConnectionFactory;
 import model.Morador;
 
 public class MoradorDao {
@@ -19,7 +20,7 @@ private Connection con;
 	
 	//construtor inicia conexão
 	public MoradorDao() {
-		this.con = new ConnectionFactory().getConnection();
+		this.con = new OracleConnectionFactory().getConnection();
 	}
 
 	
@@ -35,8 +36,8 @@ private Connection con;
 			stmt.setInt(1, morador.getCpf());
 			stmt.setString(2, morador.getNome());
 			stmt.setString(3, morador.getCurso());
-			stmt.setBoolean(4, morador.getVeterano());
-			
+			stmt.setInt(4, morador.getVeterano());
+			//stmt.setNull(5, java.sql.Types.REF,"FESTA_NT");
 			stmt.execute();
 			stmt.close();
 			con.close();
@@ -59,7 +60,7 @@ private Connection con;
 				m.setCpf(rs.getInt("cpf"));
 				m.setNome(rs.getString("nome"));
 				m.setCurso(rs.getString("curso"));
-				m.setVeterano(rs.getBoolean("veterano"));
+				m.setVeterano(rs.getInt("veterano"));
 				moradores.add(m);
 			}
 			rs.close();
@@ -80,7 +81,7 @@ private Connection con;
 			stmt.setInt(1, m.getCpf());
 			stmt.setString(2, m.getNome());
 			stmt.setString(3, m.getCurso());
-			stmt.setBoolean(4, m.getVeterano());
+			stmt.setInt(4, m.getVeterano());
 			stmt.setInt(5, m.getCpf());
 			stmt.execute();
 			stmt.close();
@@ -108,7 +109,6 @@ private Connection con;
 	public Morador lerCpf(int cpf){
 		Morador morador = new Morador();
 		try {
-			
 			PreparedStatement stmt = this.con.prepareStatement("select * from morador where cpf=?");
 			stmt.setInt(1, cpf);
 			ResultSet rs = stmt.executeQuery();
@@ -117,7 +117,7 @@ private Connection con;
 				m.setCpf(rs.getInt("cpf"));
 				m.setNome(rs.getString("nome"));
 				m.setCurso(rs.getString("curso"));
-				m.setVeterano(rs.getBoolean("veterano"));
+				m.setVeterano(rs.getInt("veterano"));
 				morador = m;
 			}
 			rs.close();
@@ -127,5 +127,4 @@ private Connection con;
 		}
 		return morador;
 	}
-
 }

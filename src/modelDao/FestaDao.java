@@ -10,7 +10,7 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
-import controller.ConnectionFactory;
+import controller.OracleConnectionFactory;
 import model.Festa;
 import model.Tarefa;
 
@@ -21,7 +21,7 @@ private Connection con;
 	
 	//construtor inicia conexão
 	public FestaDao() {
-		this.con = new ConnectionFactory().getConnection();
+		this.con = new OracleConnectionFactory().getConnection();
 	}
 
 	

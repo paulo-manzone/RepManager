@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 
 import com.mysql.cj.protocol.Resultset;
 
-import controller.ConnectionFactory;
+import controller.OracleConnectionFactory;
 import model.Tarefa;
 
 public class TarefaDao {
@@ -19,7 +19,7 @@ public class TarefaDao {
 	
 	//construtor inicia conexão
 	public TarefaDao() {
-		this.con = new ConnectionFactory().getConnection();
+		this.con = new OracleConnectionFactory().getConnection();
 	}
 
 	
@@ -28,14 +28,24 @@ public class TarefaDao {
 	//===========================================================================================
 	
 	public void adicionar(Tarefa tarefa) {
+		JOptionPane.showMessageDialog(null,"1");
 		String sql = "insert into tarefa (numTarefa, descricao) values (?,?)";
+		JOptionPane.showMessageDialog(null,"2");
 		PreparedStatement stmt;
+		JOptionPane.showMessageDialog(null,"3");
 		try {
+			JOptionPane.showMessageDialog(null,"4");
 			stmt = con.prepareStatement(sql);
+			JOptionPane.showMessageDialog(null,"5");
 			stmt.setInt(1, tarefa.getNumTarefa());
+			
 			stmt.setString(2, tarefa.getDescricao());
-			stmt.execute();
+			JOptionPane.showMessageDialog(null,tarefa.getDescricao());
+			JOptionPane.showMessageDialog(null,tarefa.getNumTarefa());
+			stmt.executeUpdate();
+			JOptionPane.showMessageDialog(null,"8");
 			stmt.close();
+			JOptionPane.showMessageDialog(null,"9");
 			con.close();
 		}catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Erro: "+ e.getMessage());

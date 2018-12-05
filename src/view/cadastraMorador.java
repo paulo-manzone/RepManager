@@ -115,7 +115,11 @@ public class cadastraMorador extends JFrame implements ActionListener{
 			m.setCpf(Integer.parseInt(txtCPF.getText()));
 			m.setNome(txtNome.getText());
 			m.setCurso(txtCurso.getText());
-			m.setVeterano(chbVeterano.isSelected());
+			m.setVeterano(1);
+			if(chbVeterano.isSelected())
+				m.setVeterano(1);
+			else
+				m.setVeterano(0);
 			MoradorDao mbd = new MoradorDao();
 			mbd.adicionar(m);
 			txtCPF.setText("");
@@ -129,7 +133,10 @@ public class cadastraMorador extends JFrame implements ActionListener{
 			m.setCpf(Integer.parseInt(txtCPF.getText()));
 			m.setNome(txtNome.getText());
 			m.setCurso(txtCurso.getText());
-			m.setVeterano(chbVeterano.isSelected());
+			if(chbVeterano.isSelected())
+				m.setVeterano(1);
+			else
+				m.setVeterano(0);
 			MoradorDao mbd = new MoradorDao();
 			mbd.atualizar(m);
 			atualizaTable();

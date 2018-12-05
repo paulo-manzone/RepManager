@@ -14,6 +14,9 @@ import controller.CriadorBancoDadosOracle;
 import controller.OracleConnectionFactory;
 import controller.TestaConexao;
 
+import model.Morador;
+import modelDao.MoradorDao;
+
 public class disparaSistema {
 
 	public static void main(String[] args) {
@@ -35,14 +38,15 @@ public class disparaSistema {
 			JOptionPane.showMessageDialog(null,"Look and feel tentou acesso ilegal");
 		}
 		JOptionPane.showMessageDialog(null, "Bem vindo ao RepManager");
-		try {
-			new TestaConexao();
+		/*try {
+			//new TestaConexao();
 		}catch (SQLException e) {
 			JOptionPane.showMessageDialog(null,"Falha na conexão");
-		}
+		}*/
 		
 		//Criar o banco  em si
 		//new CriadorBancoDadosOracle();
+		
 		
 		/*Testando o banco de dados oracle
 		try {
@@ -54,9 +58,16 @@ public class disparaSistema {
 			JOptionPane.showMessageDialog(null,"Erro na conexão bro!");
 		}*/
 		//Fim teste===================
-		
-		
+		/*
+		Morador rodono = new Morador();
+		rodono.setCpf(2928);
+		rodono.setCurso("bcc");
+		rodono.setNome("rodney");
+		rodono.setVeterano(true);
+		new MoradorDao().adicionar(rodono);
+		*/
 		new formMenu();
+		
 		
 		
 

@@ -10,7 +10,7 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
-import controller.ConnectionFactory;
+import controller.OracleConnectionFactory;
 import model.Responsavel;
 
 public class ResponsavelDao {
@@ -19,7 +19,7 @@ private Connection con;
 	
 	//construtor inicia conexão
 	public ResponsavelDao() {
-		this.con = new ConnectionFactory().getConnection();
+		this.con = new OracleConnectionFactory().getConnection();
 	}
 
 	
@@ -28,7 +28,8 @@ private Connection con;
 	//===========================================================================================
 	
 	public void adicionar(Responsavel responsavel) {
-		String sql = "insert into responsavel (cpf, numTarefa, data) values (?,?,?)";
+		//String sql = "insert into responsavel (cpf, numTarefa, data) values (?,?,?)"; (TO_DATE('2003/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss')))
+		String sql = "insert into responsavel(morador, tarefa, data) values ((select ref(m) from morador m where m.cpf = ?), (select ref(t) from tarefa t where t.numtarefa =  ?),?;";
 		PreparedStatement stmt;
 		try {
 			stmt = con.prepareStatement(sql);
@@ -50,8 +51,8 @@ private Connection con;
 		List<Responsavel> responsaveis = new ArrayList<Responsavel>();
 		try {
 			
-			PreparedStatement stmt = this.con.prepareStatement("select * from responsavel where numTarefa = ?");
-			stmt.setInt(1, numTarefa);
+			PreparedStatement stmt = this.con.prepareStatement("select r.morador.cpf, r.tarefa.numtarefa, r.data from responsavel r");
+			//stmt.setInt(1, numTarefa);
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next()) {
 				Responsavel r = new Responsavel();
@@ -76,7 +77,7 @@ private Connection con;
 	//===========================================================================================
 		public void excluir(Responsavel r) {
 			try {
-				PreparedStatement stmt = this.con.prepareStatement("delete from responsavel where cpf = ?");
+				PreparedStatement stmt = this.con.prepareStatement("delete from responsavel r where r.morador.cpf = ?");
 				stmt.setInt(1, r.getCpf());
 				stmt.execute();
 				stmt.close();

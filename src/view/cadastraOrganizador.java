@@ -127,7 +127,7 @@ public class cadastraOrganizador extends JFrame implements ActionListener{
 		private boolean validaVeterano(int cpf) {
 			MoradorDao mdb = new MoradorDao();
 			Morador m = mdb.lerCpf(cpf);
-			if(m.getVeterano() == true) {
+			if(m.getVeterano() == 1) {
 				return true;
 			}else return false;
 			

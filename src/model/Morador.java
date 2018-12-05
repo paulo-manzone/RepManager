@@ -6,7 +6,7 @@ public class Morador {
 	private int cpf;
 	private String nome;
 	private String curso;
-	private Boolean veterano;
+	private int veterano;
 	
 	//Getters e Setters
 	public int getCpf() {
@@ -27,10 +27,10 @@ public class Morador {
 	public void setCurso(String curso) {
 		this.curso = curso;
 	}
-	public Boolean getVeterano() {
+	public int getVeterano() {
 		return veterano;
 	}
-	public void setVeterano(Boolean veterano) {
+	public void setVeterano(int veterano) {
 		this.veterano = veterano;
 	}
 	

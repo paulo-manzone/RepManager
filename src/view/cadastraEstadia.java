@@ -133,7 +133,6 @@ public class cadastraEstadia extends JFrame implements ActionListener{
 			if(verificaDisponbilidade(es.getNumQuarto())) {
 				esbd.adicionar(es);
 			}else JOptionPane.showMessageDialog(null,"Impossivel realizar operação!\nQuarto não possui capacidade.");
-
 			txtCPF.setText("CPF");
 			txtQuarto.setText("NºQuarto");
 			txtCusto.setText("Custo");
@@ -182,11 +181,17 @@ public class cadastraEstadia extends JFrame implements ActionListener{
 	}
 	
 	private boolean verificaDisponbilidade(int numQuarto) {
+JOptionPane.showMessageDialog(null, "1");
 		QuartoDao qbd = new QuartoDao();
+		JOptionPane.showMessageDialog(null, "2");
 		List<Quarto> quartos = qbd.ler();
+		JOptionPane.showMessageDialog(null, "3");
 		EstadiaDao ebd = new EstadiaDao();
+		JOptionPane.showMessageDialog(null, "4");
 		int pessoasAlocadas = ebd.ler(numQuarto);
+		JOptionPane.showMessageDialog(null, "5");
 		for(Quarto quarto: quartos) {
+			JOptionPane.showMessageDialog(null, "6");
 			if(quarto.getNumQuarto() == numQuarto) {
 				if(pessoasAlocadas < quarto.getCapacidade()) {
 					return true;
